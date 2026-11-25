@@ -15,12 +15,16 @@ Satu fondasi. Banyak produk. Kemampuan terus berkembang tanpa membongkar fondasi
 | --- | --- |
 | Master Technical Specification | Draft baseline selesai (8 dokumen + lampiran) |
 | Identitas & arsitektur | Defined |
-| Repository | Diinisialisasi |
+| Repository | Aktif di GitHub, cabang `main` |
 | Core Kernel | Terimplementasi + teruji |
-| Domain platform | Terencana, belum diimplementasi |
-| Produksi | Belum — lihat roadmap |
+| Identity, Security, Capability, Agent, Skills, Workflow, Events | Terimplementasi + teruji |
+| Protocol MCP & A2A | Adapter kontrak terimplementasi + teruji |
+| Integrasi WhatsApp | Webhook, verifikasi, dan normalisasi teruji |
+| MVP gate end-to-end | **Terbukti** — `tests/e2e/mvp.test.ts` |
+| Test | **153 test lulus dalam 21 file** |
+| Produksi | Belum — lihat batas di bawah |
 
-> Ini adalah fondasi engineering. Spesifikasi selesai tidak berarti seluruh software selesai atau diaudit. Setiap kontrak masih harus dibuktikan lewat prototype, test, dan review teknis.
+> Fondasi engineering sudah terbukti lewat test end-to-end. Ini **bukan** berarti seluruh software produksi selesai: API HTTP, migrasi real di PostgreSQL, SDK/CLI, security audit, benchmark, dan clearancy merek masih tertunda.
 
 ---
 
@@ -92,7 +96,7 @@ tests/        unit, integration, contract, e2e, security, evaluation
 
 Folder dibuat **saat modulnya mulai dibangun**, bukan sekadar dibuat kosong sejak hari pertama.
 
-Saat ini yang sudah berisi kode nyata: `packages/`.
+Saat ini yang sudah berisi kode nyata dan teruji: `packages/`, `domains/`, `adapters/`, `protocols/`, dan `tests/e2e/`.
 
 ---
 
@@ -153,6 +157,7 @@ await app.shutdown();
 - [`docs/security/threat-model.md`](docs/security/threat-model.md) — model ancaman.
 - [`docs/research/`](docs/research/) — hasil riset MCP, A2A, Agent Skills, WhatsApp, OWASP.
 - [`AGENTS.md`](AGENTS.md) — aturan wajib untuk AI coding agent.
+- [`docs/development/implementation-status.md`](docs/development/implementation-status.md) — bukti implementasi dan batasnya.
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — ringkasan arsitektur.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — tata cara kontribusi.
 - [`SECURITY.md`](SECURITY.md) — pelaporan kerentanan.

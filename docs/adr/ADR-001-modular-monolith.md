@@ -23,7 +23,7 @@ Microservices memberi isolasi dan independent deployment, tetapi menambah komple
 
 1. Microservices sejak awal.
 2. Modular monolith dengan batas domain ketat.
-3. Serverless 함수 per-fitue.
+3. Serverless function per fitur.
 
 ## Decision
 

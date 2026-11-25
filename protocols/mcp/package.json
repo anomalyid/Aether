@@ -1,0 +1,18 @@
+{
+  "name": "@aether/mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Adapter MCP Aether dengan versi protokol 2026-07-28 dan tool snapshot",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

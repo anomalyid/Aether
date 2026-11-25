@@ -12,6 +12,9 @@
     { "path": "../../domains/identity" },
     { "path": "../../domains/security" },
     { "path": "../../domains/capabilities" },
-    { "path": "../../domains/agents" }
+    { "path": "../../domains/agents" },
+    { "path": "../../packages/events" },
+    { "path": "../../packages/identifiers" },
+    { "path": "../../domains/workflows" }
   ]
 }

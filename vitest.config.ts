@@ -17,6 +17,12 @@ export default defineConfig({
       "@aether/security": fromRoot("./domains/security/src/index.ts"),
       "@aether/capabilities": fromRoot("./domains/capabilities/src/index.ts"),
       "@aether/agents": fromRoot("./domains/agents/src/index.ts"),
+      "@aether/events": fromRoot("./packages/events/src/index.ts"),
+      "@aether/workflows": fromRoot("./domains/workflows/src/index.ts"),
+      "@aether/provider-whatsapp": fromRoot("./adapters/providers/whatsapp/src/index.ts"),
+      "@aether/mcp": fromRoot("./protocols/mcp/src/index.ts"),
+      "@aether/a2a": fromRoot("./protocols/a2a/src/index.ts"),
+      "@aether/skills": fromRoot("./domains/skills/src/index.ts"),
     },
   },
   test: {

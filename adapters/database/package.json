@@ -9,7 +9,10 @@
     "@aether/identity": "workspace:*",
     "@aether/security": "workspace:*",
     "@aether/capabilities": "workspace:*",
-    "@aether/agents": "workspace:*"
+    "@aether/agents": "workspace:*",
+    "@aether/events": "workspace:*",
+    "@aether/identifiers": "workspace:*",
+    "@aether/workflows": "workspace:*"
   },
   "exports": {
     ".": {

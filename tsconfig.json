@@ -11,6 +11,12 @@
     { "path": "./adapters/database" },
     { "path": "./domains/security" },
     { "path": "./domains/capabilities" },
-    { "path": "./domains/agents" }
+    { "path": "./domains/agents" },
+    { "path": "./packages/events" },
+    { "path": "./domains/workflows" },
+    { "path": "./adapters/providers/whatsapp" },
+    { "path": "./protocols/mcp" },
+    { "path": "./protocols/a2a" },
+    { "path": "./domains/skills" }
   ]
 }

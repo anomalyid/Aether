@@ -3,7 +3,9 @@ packages:
   - "apps/*"
   - "domains/*"
   - "adapters/*"
+  - "adapters/providers/*"
   - "developer/*"
+  - "protocols/*"
 
 catalog:
   typescript: 5.9.3

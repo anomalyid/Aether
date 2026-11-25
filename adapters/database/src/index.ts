@@ -11,10 +11,14 @@ export { createMemoryCapabilityRepositories } from "./memory/capability-reposito
 export type { CapabilityRepositories } from "./memory/capability-repositories.js";
 export { createMemoryAgentRepositories } from "./memory/agent-repositories.js";
 export type { AgentRepositories } from "./memory/agent-repositories.js";
+export { MemoryProcessedEventStore, MemoryOutboxStore } from "./memory/event-repositories.js";
+export { createMemoryWorkflowRepositories } from "./memory/workflow-repositories.js";
+export type { WorkflowRepositories } from "./memory/workflow-repositories.js";
 
 export const MIGRATION_FILES = {
   identity: "migrations/0001_identity.sql",
   security: "migrations/0002_security.sql",
   capability: "migrations/0003_capability.sql",
   agents: "migrations/0004_agents.sql",
+  events: "migrations/0005_events.sql",
 } as const;

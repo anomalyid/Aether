@@ -1,0 +1,20 @@
+{
+  "name": "@aether/workflows",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Domain Workflow Aether: definisi, checkpoint, retry, approval, dan durable execution",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*",
+    "@aether/events": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

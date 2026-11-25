@@ -196,12 +196,33 @@ importers:
       '@aether/errors':
         specifier: workspace:*
         version: link:../../packages/errors
+      '@aether/events':
+        specifier: workspace:*
+        version: link:../../packages/events
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
       '@aether/identity':
         specifier: workspace:*
         version: link:../../domains/identity
       '@aether/security':
         specifier: workspace:*
         version: link:../../domains/security
+      '@aether/workflows':
+        specifier: workspace:*
+        version: link:../../domains/workflows
+
+  adapters/providers/whatsapp:
+    dependencies:
+      '@aether/contracts':
+        specifier: workspace:*
+        version: link:../../../packages/contracts
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../../packages/identifiers
 
   domains/agents:
     dependencies:
@@ -260,6 +281,30 @@ importers:
         specifier: workspace:*
         version: link:../../packages/identifiers
 
+  domains/skills:
+    dependencies:
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+
+  domains/workflows:
+    dependencies:
+      '@aether/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/events':
+        specifier: workspace:*
+        version: link:../../packages/events
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+
   packages/configuration:
     dependencies:
       '@aether/errors':
@@ -289,6 +334,15 @@ importers:
         specifier: workspace:*
         version: link:../contracts
 
+  packages/events:
+    dependencies:
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../identifiers
+
   packages/identifiers: {}
 
   packages/kernel:
@@ -308,6 +362,24 @@ importers:
       '@aether/identifiers':
         specifier: workspace:*
         version: link:../identifiers
+
+  protocols/a2a:
+    dependencies:
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+
+  protocols/mcp:
+    dependencies:
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
 
 packages:
 

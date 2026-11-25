@@ -1,0 +1,18 @@
+{
+  "name": "@aether/a2a",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Adapter A2A Aether: Agent Card dan delegasi antar-agent",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@aether/provider-whatsapp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Integrasi WhatsApp Aether: canonical messaging domain, Cloud API webhook, dan abstraction provider",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

@@ -64,11 +64,15 @@ Event masuk → Normalisasi → Agent Runtime → Context + Skill Resolution
 
 Jika alur ini belum bekerja, Aether belum memiliki fondasi agent infrastructure yang terbukti.
 
+## Status implementasi
+
+Fondasi sampai fase 6 sudah dibangun dan diuji, termasuk test MVP end-to-end. Rincian bukti dan batasnya ada di [`../development/implementation-status.md`](../development/implementation-status.md).
+
 ## Yang belum boleh diklaim selesai
 
-- Source code seluruh domain (baru kernel yang selesai).
-- Prototype validation untuk domain lanjutan.
-- Complete API schemas dan final database migrations.
+- API HTTP/OpenAPI dan endpoint aktif.
+- Migrasi PostgreSQL sungguhan beserta uji RLS lintas tenant.
+- SDK, CLI, Console, dan Studio.
 - Security audit formal dan performance benchmark.
 - Production deployment.
 - Trademark clearance (PDKI / WIPO).
