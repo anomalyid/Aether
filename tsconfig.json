@@ -6,6 +6,9 @@
     { "path": "./packages/identifiers" },
     { "path": "./packages/configuration" },
     { "path": "./packages/context" },
-    { "path": "./packages/kernel" }
+    { "path": "./packages/kernel" },
+    { "path": "./domains/identity" },
+    { "path": "./adapters/database" },
+    { "path": "./domains/security" }
   ]
 }

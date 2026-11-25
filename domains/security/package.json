@@ -1,0 +1,19 @@
+{
+  "name": "@aether/security",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Domain Security Aether: authorization, policy, delegasi, approval, dan audit",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

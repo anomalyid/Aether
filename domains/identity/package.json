@@ -1,0 +1,19 @@
+{
+  "name": "@aether/identity",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Domain Identity Aether: tenant, user, membership, principal, role, dan permission",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

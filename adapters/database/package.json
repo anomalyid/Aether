@@ -1,0 +1,19 @@
+{
+  "name": "@aether/database",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Adapter penyimpanan Aether: migrasi SQL dan implementasi repository in-memory",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/errors": "workspace:*",
+    "@aether/identity": "workspace:*",
+    "@aether/security": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "migrations"]
+}

@@ -12,11 +12,20 @@ export default defineConfig({
       "@aether/configuration": fromRoot("./packages/configuration/src/index.ts"),
       "@aether/context": fromRoot("./packages/context/src/index.ts"),
       "@aether/kernel": fromRoot("./packages/kernel/src/index.ts"),
+      "@aether/identity": fromRoot("./domains/identity/src/index.ts"),
+      "@aether/database": fromRoot("./adapters/database/src/index.ts"),
+      "@aether/security": fromRoot("./domains/security/src/index.ts"),
     },
   },
   test: {
     environment: "node",
-    include: ["packages/**/*.test.ts", "tests/**/*.test.ts"],
+    include: [
+      "packages/**/*.test.ts",
+      "domains/**/*.test.ts",
+      "adapters/**/*.test.ts",
+      "developer/**/*.test.ts",
+      "tests/**/*.test.ts",
+    ],
     coverage: {
       provider: "v8",
       include: ["packages/*/src/**/*.ts"],

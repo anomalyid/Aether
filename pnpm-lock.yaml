@@ -185,6 +185,42 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(@types/node@22.20.7)(vite@8.3.8(@types/node@22.20.7))
 
+  adapters/database:
+    dependencies:
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identity':
+        specifier: workspace:*
+        version: link:../../domains/identity
+      '@aether/security':
+        specifier: workspace:*
+        version: link:../../domains/security
+
+  domains/identity:
+    dependencies:
+      '@aether/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+
+  domains/security:
+    dependencies:
+      '@aether/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+
   packages/configuration:
     dependencies:
       '@aether/errors':
