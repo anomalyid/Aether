@@ -9,6 +9,7 @@
     { "path": "./packages/kernel" },
     { "path": "./domains/identity" },
     { "path": "./adapters/database" },
-    { "path": "./domains/security" }
+    { "path": "./domains/security" },
+    { "path": "./domains/capabilities" }
   ]
 }

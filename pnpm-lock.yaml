@@ -187,6 +187,9 @@ importers:
 
   adapters/database:
     dependencies:
+      '@aether/capabilities':
+        specifier: workspace:*
+        version: link:../../domains/capabilities
       '@aether/errors':
         specifier: workspace:*
         version: link:../../packages/errors
@@ -196,6 +199,21 @@ importers:
       '@aether/security':
         specifier: workspace:*
         version: link:../../domains/security
+
+  domains/capabilities:
+    dependencies:
+      '@aether/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@aether/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
+      '@aether/identifiers':
+        specifier: workspace:*
+        version: link:../../packages/identifiers
+      '@aether/security':
+        specifier: workspace:*
+        version: link:../security
 
   domains/identity:
     dependencies:

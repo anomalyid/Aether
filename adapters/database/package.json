@@ -7,7 +7,8 @@
   "dependencies": {
     "@aether/errors": "workspace:*",
     "@aether/identity": "workspace:*",
-    "@aether/security": "workspace:*"
+    "@aether/security": "workspace:*",
+    "@aether/capabilities": "workspace:*"
   },
   "exports": {
     ".": {

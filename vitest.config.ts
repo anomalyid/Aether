@@ -15,6 +15,7 @@ export default defineConfig({
       "@aether/identity": fromRoot("./domains/identity/src/index.ts"),
       "@aether/database": fromRoot("./adapters/database/src/index.ts"),
       "@aether/security": fromRoot("./domains/security/src/index.ts"),
+      "@aether/capabilities": fromRoot("./domains/capabilities/src/index.ts"),
     },
   },
   test: {

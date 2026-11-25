@@ -10,6 +10,7 @@
   "references": [
     { "path": "../../packages/errors" },
     { "path": "../../domains/identity" },
-    { "path": "../../domains/security" }
+    { "path": "../../domains/security" },
+    { "path": "../../domains/capabilities" }
   ]
 }
