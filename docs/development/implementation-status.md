@@ -2,7 +2,7 @@
 
 Dokumen ini memisahkan **yang sudah dibangun dan diuji** dari **yang masih rancangan**. Tujuannya mencegah klaim berlebihan.
 
-Verifikasi terakhir: `pnpm build` lulus · **153 test lulus dalam 21 file** · satu test MVP end-to-end.
+Verifikasi terakhir: `pnpm build` lulus · **176 test unit lulus dalam 24 file** · **4 test integrasi PostgreSQL sungguhan** · satu test MVP end-to-end.
 
 ## 1. Yang sudah diimplementasi dan diuji
 
@@ -26,6 +26,10 @@ Verifikasi terakhir: `pnpm build` lulus · **153 test lulus dalam 21 file** · s
 | 6 | MCP 2026-07-28: meta, `server/discover`, tool snapshot, token guard | `protocols/mcp` | `index.test.ts` |
 | 6 | A2A v1.0: Agent Card, delegasi task, scope/deadline/budget | `protocols/a2a` | `index.test.ts` |
 | MVP | Skenario lengkap event → agent → skill → capability → approval → audit | `tests/e2e/mvp.test.ts` | 1 test gate |
+| 7 | API HTTP `/v1`, auth context, error taxonomy, OpenAPI, 11 endpoint | `apps/api` | `app.test.ts` (11 test) |
+| 7 | SDK TypeScript + CLI `aether` | `developer/` | `index.test.ts` pada keduanya |
+| 7 | Migration runner PostgreSQL idempoten + tenant context transaction-local | `adapters/database/src/postgres` | `tests/integration/postgres.test.ts` |
+| 7 | Uji RLS sungguhan dengan role non-superuser + Docker Compose | `infrastructure/` | 4 test integrasi |
 
 ## 2. MVP Gate — bukti fondasi bekerja
 
@@ -52,13 +56,14 @@ Verifikasi terakhir: `pnpm build` lulus · **153 test lulus dalam 21 file** · s
 - **Untrusted by default** — deskripsi tool MCP, hasil tool, dan konten eksternal diberi label untrusted dan tidak pernah dirender sebagai instruksi sistem.
 - **FAILED dapat di-resume** pada workflow sebagai recovery setelah restart.
 - **Permission provider memetakan principal → subject** sebelum lookup membership; principal ID bukan user ID.
+- **Role aplikasi RLS harus non-superuser.** Superuser melewati RLS — ditemukan saat uji integrasi pertama gagal; test sekarang memakai role `aether_app` dengan `NOBYPASSRLS`.
+- **RLS bukan pengganti authorization** aplikasi; `withTenant` memakai `set_config(..., true)` yang transaction-local.
 
 ## 4. Yang belum diimplementasi (dilarang diklaim selesai)
 
-- API HTTP/OpenAPI dan endpoint `/v1/*`.
-- Migrasi dijalankan pada PostgreSQL sungguhan beserta uji RLS lintas tenant.
-- Adapter produksi untuk database, Redis, queue, object storage, dan secret vault.
-- SDK TypeScript/Python dan CLI `aether`.
+- Adapter repository PostgreSQL produksi untuk seluruh domain (baru migration runner + tenant context).
+- Redis, queue, object storage, dan secret vault produksi.
+- SDK Python.
 - Aether Console / Studio.
 - MCP Server sisi Aether (baru MCP Client yang diuji) dan A2A transport sungguhan.
 - Provider WhatsApp Cloud API sungguhan (baru webhook verification + normalisasi).
@@ -71,6 +76,9 @@ Verifikasi terakhir: `pnpm build` lulus · **153 test lulus dalam 21 file** · s
 pnpm install --frozen-lockfile
 pnpm build
 pnpm test
+
+# Integrasi PostgreSQL sungguhan (dengan Docker/Postgres tersedia)
+AETHER_TEST_DATABASE_URL=postgres://aether:aether@localhost:55432/aether pnpm test:integration
 ```
 
 ## 6. Langkah berikutnya

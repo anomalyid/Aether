@@ -23,15 +23,26 @@ export default defineConfig({
       "@aether/mcp": fromRoot("./protocols/mcp/src/index.ts"),
       "@aether/a2a": fromRoot("./protocols/a2a/src/index.ts"),
       "@aether/skills": fromRoot("./domains/skills/src/index.ts"),
+      "@aether/api": fromRoot("./apps/api/src/index.ts"),
+      "@aether/sdk": fromRoot("./developer/sdk-typescript/src/index.ts"),
+      "@aether/cli": fromRoot("./developer/cli/src/index.ts"),
     },
   },
   test: {
     environment: "node",
+    exclude: [
+      "tests/integration/**",
+      "**/node_modules/**",
+      "**/.pnpm/**",
+      "**/dist/**",
+      "**/coverage/**",
+    ],
     include: [
       "packages/**/*.test.ts",
       "domains/**/*.test.ts",
       "adapters/**/*.test.ts",
       "developer/**/*.test.ts",
+      "apps/**/*.test.ts",
       "tests/**/*.test.ts",
     ],
     coverage: {

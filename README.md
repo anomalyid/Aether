@@ -21,7 +21,10 @@ Satu fondasi. Banyak produk. Kemampuan terus berkembang tanpa membongkar fondasi
 | Protocol MCP & A2A | Adapter kontrak terimplementasi + teruji |
 | Integrasi WhatsApp | Webhook, verifikasi, dan normalisasi teruji |
 | MVP gate end-to-end | **Terbukti** — `tests/e2e/mvp.test.ts` |
-| Test | **153 test lulus dalam 21 file** |
+| API HTTP `/v1` + OpenAPI | Terimplementasi + teruji |
+| SDK TypeScript + CLI `aether` | Terimplementasi + teruji |
+| PostgreSQL migration runner + RLS | Teruji dengan database sungguhan |
+| Test | **176 unit + 4 integrasi lulus** |
 | Produksi | Belum — lihat batas di bawah |
 
 > Fondasi engineering sudah terbukti lewat test end-to-end. Ini **bukan** berarti seluruh software produksi selesai: API HTTP, migrasi real di PostgreSQL, SDK/CLI, security audit, benchmark, dan clearancy merek masih tertunda.
@@ -96,7 +99,7 @@ tests/        unit, integration, contract, e2e, security, evaluation
 
 Folder dibuat **saat modulnya mulai dibangun**, bukan sekadar dibuat kosong sejak hari pertama.
 
-Saat ini yang sudah berisi kode nyata dan teruji: `packages/`, `domains/`, `adapters/`, `protocols/`, dan `tests/e2e/`.
+Saat ini yang sudah berisi kode nyata dan teruji: `packages/`, `domains/`, `adapters/`, `protocols/`, `apps/api`, `developer/`, dan `tests/`.
 
 ---
 
@@ -105,7 +108,26 @@ Saat ini yang sudah berisi kode nyata dan teruji: `packages/`, `domains/`, `adap
 ```bash
 pnpm install
 pnpm build     # kompilasi TypeScript seluruh workspace
-pnpm test      # menjalankan seluruh test
+pnpm test      # 176 test unit
+```
+
+Menjalankan API dengan data contoh:
+
+```bash
+AETHER_SEED_DEMO=true PORT=3000 node apps/api/dist/bin.js
+curl http://localhost:3000/openapi.json
+```
+
+Atau pakai Docker Compose:
+
+```bash
+docker compose -f infrastructure/compose/docker-compose.yml up --build
+```
+
+Uji integrasi PostgreSQL (RLS lintas tenant):
+
+```bash
+AETHER_TEST_DATABASE_URL=postgres://aether:aether@localhost:55432/aether pnpm test:integration
 ```
 
 Butuh Node.js **≥ 22.12** dan pnpm **12.21**.

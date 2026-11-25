@@ -12,6 +12,8 @@ export type { CapabilityRepositories } from "./memory/capability-repositories.js
 export { createMemoryAgentRepositories } from "./memory/agent-repositories.js";
 export type { AgentRepositories } from "./memory/agent-repositories.js";
 export { MemoryProcessedEventStore, MemoryOutboxStore } from "./memory/event-repositories.js";
+export { runMigrations, MIGRATION_ORDER } from "./postgres/migration-runner.js";
+export { setTenantContext, clearTenantContext, withTenant } from "./postgres/tenant-context.js";
 export { createMemoryWorkflowRepositories } from "./memory/workflow-repositories.js";
 export type { WorkflowRepositories } from "./memory/workflow-repositories.js";
 

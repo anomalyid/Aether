@@ -17,6 +17,9 @@
     { "path": "./adapters/providers/whatsapp" },
     { "path": "./protocols/mcp" },
     { "path": "./protocols/a2a" },
-    { "path": "./domains/skills" }
+    { "path": "./domains/skills" },
+    { "path": "./apps/api" },
+    { "path": "./developer/sdk-typescript" },
+    { "path": "./developer/cli" }
   ]
 }

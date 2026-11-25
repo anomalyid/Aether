@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.test.ts"],
+  "references": [
+    { "path": "../../packages/contracts" },
+    { "path": "../../packages/errors" },
+    { "path": "../../packages/identifiers" },
+    { "path": "../../packages/events" },
+    { "path": "../../packages/context" },
+    { "path": "../../domains/identity" },
+    { "path": "../../domains/security" },
+    { "path": "../../domains/capabilities" },
+    { "path": "../../domains/agents" },
+    { "path": "../../domains/skills" },
+    { "path": "../../adapters/database" }
+  ]
+}

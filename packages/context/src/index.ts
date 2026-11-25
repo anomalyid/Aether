@@ -38,6 +38,8 @@ export function createExecutionContext(input: ContextInput): AetherExecutionCont
   };
 }
 
+export type { AetherExecutionContext } from "@aether/contracts";
+
 export function runWithContext<T>(context: AetherExecutionContext, fn: () => T): T {
   return storage.run(context, fn);
 }

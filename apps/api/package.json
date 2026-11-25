@@ -1,0 +1,27 @@
+{
+  "name": "@aether/api",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "API publik Aether dengan kontrak /v1, response standar, dan OpenAPI",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/agents": "workspace:*",
+    "@aether/capabilities": "workspace:*",
+    "@aether/context": "workspace:*",
+    "@aether/database": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/events": "workspace:*",
+    "@aether/identity": "workspace:*",
+    "@aether/identifiers": "workspace:*",
+    "@aether/security": "workspace:*",
+    "@aether/skills": "workspace:*",
+    "fastify": "5.12.8"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

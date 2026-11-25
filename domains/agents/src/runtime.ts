@@ -334,7 +334,11 @@ export class AgentRuntime {
     }
   }
 
-  private async getRun(runId: string, tenantId: string): Promise<AgentRun> {
+  async listRuns(tenantId: string): Promise<AgentRun[]> {
+    return this.dependencies.runs.listByTenant(tenantId);
+  }
+
+  async getRun(runId: string, tenantId: string): Promise<AgentRun> {
     const run = await this.dependencies.runs.findById(runId);
     if (run === null) {
       throw new AetherError(ErrorCode.RESOURCE_NOT_FOUND, "Agent run tidak ditemukan.", {

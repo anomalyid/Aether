@@ -12,7 +12,8 @@
     "@aether/agents": "workspace:*",
     "@aether/events": "workspace:*",
     "@aether/identifiers": "workspace:*",
-    "@aether/workflows": "workspace:*"
+    "@aether/workflows": "workspace:*",
+    "pg": "8.23.1"
   },
   "exports": {
     ".": {

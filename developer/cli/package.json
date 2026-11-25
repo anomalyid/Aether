@@ -1,0 +1,20 @@
+{
+  "name": "@aether/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "CLI Aether untuk development dan inspeksi",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/sdk": "workspace:*"
+  },
+  "bin": {
+    "aether": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

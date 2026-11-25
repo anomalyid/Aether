@@ -15,10 +15,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo tsconfig.tsbuildinfo"
   },
   "devDependencies": {
     "@types/node": "22.20.7",
+    "@types/pg": "8.23.1",
+    "pg": "8.23.1",
     "typescript": "5.9.3",
     "vitest": "5.1.2"
   }
