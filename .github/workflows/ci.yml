@@ -1,0 +1,62 @@
+name: CI Aether
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build dan Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil source
+        uses: actions/checkout@v4
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Siapkan pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.21.0
+
+      - name: Install dependency
+        run: pnpm install --frozen-lockfile
+
+      - name: Kompilasi TypeScript
+        run: pnpm build
+
+      - name: Jalankan test
+        run: pnpm test
+
+  kebijakan:
+    name: Pemeriksaan kebijakan repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil source
+        uses: actions/checkout@v4
+
+      - name: Pastikan file tata kelola ada
+        run: |
+          test -f AGENTS.md
+          test -f CONTRIBUTING.md
+          test -f SECURITY.md
+          test -f ARCHITECTURE.md
+          test -f docs/adr/README.md
+          test -f docs/security/threat-model.md
+
+      - name: Tolak secret yang tidak sengaja tertanam
+        run: |
+          if grep -rInE '(gho_|ghp_|AKIA[0-9A-Z]{16}|sk-[A-Za-z0-9]{32,})' \
+            --exclude-dir=.git --exclude-dir=node_modules --exclude='*.md' .; then
+            echo "Kredensial terdeteksi di source code."
+            exit 1
+          fi

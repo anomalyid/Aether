@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/contracts" },
+    { "path": "./packages/errors" },
+    { "path": "./packages/identifiers" },
+    { "path": "./packages/configuration" },
+    { "path": "./packages/context" },
+    { "path": "./packages/kernel" }
+  ]
+}

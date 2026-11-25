@@ -1,0 +1,17 @@
+{
+  "name": "@aether/errors",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Taksonomi dan normalisasi error Aether",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

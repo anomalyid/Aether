@@ -1,0 +1,19 @@
+{
+  "name": "@aether/context",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Propagasi execution context Aether",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

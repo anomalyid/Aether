@@ -1,0 +1,25 @@
+{
+  "name": "@aether/root",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Aether — The Fabric of Intelligence. Universal Agent & Intelligence Infrastructure.",
+  "license": "MIT",
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "check": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo tsconfig.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.7",
+    "typescript": "5.9.3",
+    "vitest": "5.1.2"
+  }
+}

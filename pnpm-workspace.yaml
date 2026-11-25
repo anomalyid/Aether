@@ -1,0 +1,17 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+  - "domains/*"
+  - "adapters/*"
+  - "developer/*"
+
+catalog:
+  typescript: 5.9.3
+  zod: 4.6.7
+  vitest: 5.1.2
+
+minimumReleaseAgeExclude:
+  - "@types/node@22.20.7"
+  - "@vitest/mocker@5.1.2"
+  - "@vitest/spy@5.1.2"
+  - vitest@5.1.2

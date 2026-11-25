@@ -1,0 +1,14 @@
+{
+  "name": "@aether/contracts",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Kontrak internal kanonis Aether",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}
