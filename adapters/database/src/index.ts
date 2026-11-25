@@ -9,9 +9,12 @@ export { createMemorySecurityRepositories } from "./memory/security-repositories
 export type { SecurityRepositories } from "./memory/security-repositories.js";
 export { createMemoryCapabilityRepositories } from "./memory/capability-repositories.js";
 export type { CapabilityRepositories } from "./memory/capability-repositories.js";
+export { createMemoryAgentRepositories } from "./memory/agent-repositories.js";
+export type { AgentRepositories } from "./memory/agent-repositories.js";
 
 export const MIGRATION_FILES = {
   identity: "migrations/0001_identity.sql",
   security: "migrations/0002_security.sql",
   capability: "migrations/0003_capability.sql",
+  agents: "migrations/0004_agents.sql",
 } as const;

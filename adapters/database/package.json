@@ -8,7 +8,8 @@
     "@aether/errors": "workspace:*",
     "@aether/identity": "workspace:*",
     "@aether/security": "workspace:*",
-    "@aether/capabilities": "workspace:*"
+    "@aether/capabilities": "workspace:*",
+    "@aether/agents": "workspace:*"
   },
   "exports": {
     ".": {

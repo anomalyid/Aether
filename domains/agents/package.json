@@ -1,0 +1,21 @@
+{
+  "name": "@aether/agents",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Domain Agent Aether: runtime, model gateway, context, budget, dan evaluation",
+  "license": "MIT",
+  "dependencies": {
+    "@aether/contracts": "workspace:*",
+    "@aether/errors": "workspace:*",
+    "@aether/identifiers": "workspace:*",
+    "@aether/capabilities": "workspace:*",
+    "@aether/security": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

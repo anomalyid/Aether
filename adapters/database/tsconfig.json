@@ -11,6 +11,7 @@
     { "path": "../../packages/errors" },
     { "path": "../../domains/identity" },
     { "path": "../../domains/security" },
-    { "path": "../../domains/capabilities" }
+    { "path": "../../domains/capabilities" },
+    { "path": "../../domains/agents" }
   ]
 }
