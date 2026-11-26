@@ -8,6 +8,8 @@ coverage/
 !.env.example
 *.log
 .DS_Store
+__pycache__/
+*.pyc
 auth_info_baileys/
 *.pem
 *.key
