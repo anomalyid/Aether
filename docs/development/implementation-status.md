@@ -2,7 +2,7 @@
 
 Dokumen ini memisahkan **yang sudah dibangun dan diuji** dari **yang masih rancangan**. Tujuannya mencegah klaim berlebihan.
 
-Verifikasi terakhir: `pnpm build` lulus · **176 test unit lulus dalam 24 file** · **4 test integrasi PostgreSQL sungguhan** · satu test MVP end-to-end.
+Verifikasi terakhir: `pnpm build` lulus · **176 test unit lulus dalam 24 file** · **6 test integrasi PostgreSQL sungguhan** · **4 test SDK Python** · satu test MVP end-to-end.
 
 ## 1. Yang sudah diimplementasi dan diuji
 
@@ -29,7 +29,9 @@ Verifikasi terakhir: `pnpm build` lulus · **176 test unit lulus dalam 24 file**
 | 7 | API HTTP `/v1`, auth context, error taxonomy, OpenAPI, 11 endpoint | `apps/api` | `app.test.ts` (11 test) |
 | 7 | SDK TypeScript + CLI `aether` | `developer/` | `index.test.ts` pada keduanya |
 | 7 | Migration runner PostgreSQL idempoten + tenant context transaction-local | `adapters/database/src/postgres` | `tests/integration/postgres.test.ts` |
-| 7 | Uji RLS sungguhan dengan role non-superuser + Docker Compose | `infrastructure/` | 4 test integrasi |
+| 7 | Uji RLS sungguhan dengan role non-superuser + Docker Compose | `infrastructure/` | 6 test integrasi |
+| 8 | Repository PostgreSQL Identity & Security + runner tenant | `adapters/database/src/postgres` | `tests/integration/postgres.test.ts` |
+| 8 | SDK Python stdlib-only | `developer/sdk-python` | 4 test unittest |
 
 ## 2. MVP Gate — bukti fondasi bekerja
 
@@ -61,9 +63,8 @@ Verifikasi terakhir: `pnpm build` lulus · **176 test unit lulus dalam 24 file**
 
 ## 4. Yang belum diimplementasi (dilarang diklaim selesai)
 
-- Adapter repository PostgreSQL produksi untuk seluruh domain (baru migration runner + tenant context).
+- Adapter repository PostgreSQL untuk domain Capability, Agent, Workflow, dan Event.
 - Redis, queue, object storage, dan secret vault produksi.
-- SDK Python.
 - Aether Console / Studio.
 - MCP Server sisi Aether (baru MCP Client yang diuji) dan A2A transport sungguhan.
 - Provider WhatsApp Cloud API sungguhan (baru webhook verification + normalisasi).
@@ -79,6 +80,7 @@ pnpm test
 
 # Integrasi PostgreSQL sungguhan (dengan Docker/Postgres tersedia)
 AETHER_TEST_DATABASE_URL=postgres://aether:aether@localhost:55432/aether pnpm test:integration
+pnpm test:python
 ```
 
 ## 6. Langkah berikutnya

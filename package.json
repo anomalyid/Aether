@@ -16,6 +16,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:python": "python3 -m unittest discover -s developer/sdk-python/tests -t developer/sdk-python -v",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo tsconfig.tsbuildinfo"
   },
   "devDependencies": {

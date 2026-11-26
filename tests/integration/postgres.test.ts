@@ -12,7 +12,25 @@
 
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { Pool } from "pg";
-import { runMigrations, withTenant } from "@aether/database";
+import {
+  createPgIdentityRepositories,
+  createPgSecurityRepositories,
+  runMigrations,
+  withTenant,
+} from "@aether/database";
+import {
+  MembershipService,
+  PrincipalService,
+  RoleService,
+  TenantService,
+  UserService,
+} from "@aether/identity";
+import {
+  ApprovalEngine,
+  AuditService,
+  PolicyEngine,
+  type PermissionProvider,
+} from "@aether/security";
 
 const connectionString = process.env.AETHER_TEST_DATABASE_URL;
 const describeDb = connectionString === undefined ? describe.skip : describe;
@@ -44,9 +62,10 @@ describeDb("PostgreSQL — migrasi dan Row-Level Security", () => {
       END $$;
     `);
     await adminPool.query(`GRANT USAGE ON SCHEMA public TO ${APP_ROLE}`);
-    await adminPool.query(`GRANT SELECT, INSERT ON ALL TABLES IN SCHEMA public TO ${APP_ROLE}`);
+    await adminPool.query(`GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO ${APP_ROLE}`);
+    await adminPool.query(`REVOKE UPDATE, DELETE ON audit_logs FROM ${APP_ROLE}`);
     await adminPool.query(
-      `ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT ON TABLES TO ${APP_ROLE}`,
+      `ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE ON TABLES TO ${APP_ROLE}`,
     );
 
     appPool = new Pool({ connectionString: appConnectionString(connectionString as string) });
@@ -64,7 +83,7 @@ describeDb("PostgreSQL — migrasi dan Row-Level Security", () => {
       "SELECT name FROM schema_migrations ORDER BY name",
     );
     expect(result.rows.map((row) => row.name)).toContain("0001_identity.sql");
-    expect(result.rows).toHaveLength(5);
+    expect(result.rows).toHaveLength(6);
   });
 
   it("mengisolasi principal antar tenant melalui RLS", async () => {
@@ -158,5 +177,124 @@ describeDb("PostgreSQL — migrasi dan Row-Level Security", () => {
     } finally {
       client.release();
     }
+  });
+
+  it("menyimpan dan membaca domain Identity melalui repository PostgreSQL", async () => {
+    const suffix = Date.now().toString(36);
+    const awal = createPgIdentityRepositories(appPool);
+    const tenantService = new TenantService(awal.tenants);
+    const tenant = await tenantService.create({ name: "Repo A", slug: `repo-a-${suffix}` });
+
+    const repos = createPgIdentityRepositories(appPool, tenant.id);
+    const users = new UserService(repos.users);
+    const roles = new RoleService(repos.roles, repos.tenants);
+    const memberships = new MembershipService(
+      repos.memberships,
+      repos.tenants,
+      repos.users,
+      repos.roles,
+    );
+    const principals = new PrincipalService(repos.principals, repos.tenants);
+
+    const user = await users.create({
+      email: `repo-${suffix}@example.com`,
+      displayName: "Repo User",
+    });
+    const role = await roles.create({ tenantId: tenant.id, name: "member" });
+    await roles.grantPermission(tenant.id, role.id, "messaging.send", "Kirim pesan");
+    await roles.grantPermission(tenant.id, role.id, "approval.grant", "Menyetujui");
+    await memberships.addMember({ tenantId: tenant.id, userId: user.id, roleId: role.id });
+    const principal = await principals.forUser(user.id, tenant.id);
+
+    expect(await memberships.getPermissions(user.id, tenant.id)).toContain("messaging.send");
+    expect(await principals.assertInTenant(principal.id, tenant.id)).toMatchObject({
+      subjectId: user.id,
+    });
+
+    const tenantBId = `repo_b_${suffix}`;
+    await adminPool.query("INSERT INTO tenants (id, name, slug) VALUES ($1,$2,$3)", [
+      tenantBId,
+      "Repo B",
+      `repo-b-${suffix}`,
+    ]);
+    const reposB = createPgIdentityRepositories(appPool, tenantBId);
+    expect(await reposB.principals.findById(principal.id)).toBeNull();
+  });
+
+  it("menjalankan policy, approval, dan audit melalui repository PostgreSQL", async () => {
+    const suffix = Date.now().toString(36);
+    const awal = createPgIdentityRepositories(appPool);
+    const tenant = await new TenantService(awal.tenants).create({
+      name: "Repo Security",
+      slug: `repo-sec-${suffix}`,
+    });
+
+    const repos = createPgIdentityRepositories(appPool, tenant.id);
+    const users = new UserService(repos.users);
+    const roles = new RoleService(repos.roles, repos.tenants);
+    const memberships = new MembershipService(
+      repos.memberships,
+      repos.tenants,
+      repos.users,
+      repos.roles,
+    );
+    const principals = new PrincipalService(repos.principals, repos.tenants);
+
+    const user = await users.create({ email: `sec-${suffix}@example.com`, displayName: "Security" });
+    const role = await roles.create({ tenantId: tenant.id, name: "approver" });
+    await roles.grantPermission(tenant.id, role.id, "capability.invoke", "Memanggil capability");
+    await roles.grantPermission(tenant.id, role.id, "messaging.send", "Kirim pesan");
+    await roles.grantPermission(tenant.id, role.id, "approval.grant", "Menyetujui");
+    await memberships.addMember({ tenantId: tenant.id, userId: user.id, roleId: role.id });
+    const principal = await principals.forUser(user.id, tenant.id);
+
+    const provider: PermissionProvider = {
+      getPermissions: async (principalId, tenantId) => {
+        const resolved = await principals.assertInTenant(principalId, tenantId);
+        return memberships.getPermissions(resolved.subjectId, tenantId);
+      },
+    };
+
+    const sec = createPgSecurityRepositories(appPool, tenant.id);
+    await sec.policies.save({
+      id: `pol_repo_${suffix}`,
+      effect: "allow",
+      actions: ["capability.*"],
+      priority: 100,
+      enabled: true,
+    });
+
+    const engine = new PolicyEngine(sec.policies, provider);
+    const decision = await engine.evaluate({
+      principal: { tenantId: tenant.id, principalId: principal.id, actorType: "agent" },
+      action: "capability.invoke",
+      resource: "messaging.send",
+      capability: "messaging.send",
+      riskLevel: "low",
+    });
+    expect(decision.decision).toBe("allow");
+
+    const approvals = new ApprovalEngine(sec.approvals, provider);
+    const record = await approvals.create({
+      tenantId: tenant.id,
+      requesterPrincipalId: principal.id,
+      capabilityId: "messaging.send",
+      resourceReference: "res_1",
+      parameters: { destination: "62812" },
+      riskLevel: "high",
+    });
+    const approved = await approvals.approve(record.id, tenant.id, principal.id);
+    expect(approved.state).toBe("approved");
+
+    const audit = new AuditService(sec.audit);
+    await audit.record({
+      tenantId: tenant.id,
+      principalId: principal.id,
+      actorType: "agent",
+      action: "capability.invoke",
+      resource: "messaging.send",
+      outcome: "executed",
+    });
+    expect(await audit.list(tenant.id, 10)).toHaveLength(1);
   });
 });

@@ -24,7 +24,9 @@ Satu fondasi. Banyak produk. Kemampuan terus berkembang tanpa membongkar fondasi
 | API HTTP `/v1` + OpenAPI | Terimplementasi + teruji |
 | SDK TypeScript + CLI `aether` | Terimplementasi + teruji |
 | PostgreSQL migration runner + RLS | Teruji dengan database sungguhan |
-| Test | **176 unit + 4 integrasi lulus** |
+| Repository PostgreSQL Identity & Security | Terimplementasi + teruji |
+| SDK Python | Terimplementasi + teruji |
+| Test | **176 unit + 6 integrasi + 4 Python lulus** |
 | Produksi | Belum — lihat batas di bawah |
 
 > Fondasi engineering sudah terbukti lewat test end-to-end. Ini **bukan** berarti seluruh software produksi selesai: API HTTP, migrasi real di PostgreSQL, SDK/CLI, security audit, benchmark, dan clearancy merek masih tertunda.

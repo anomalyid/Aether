@@ -16,6 +16,7 @@ export const MIGRATION_ORDER = [
   "0003_capability.sql",
   "0004_agents.sql",
   "0005_events.sql",
+  "0006_principal_global_unique.sql",
 ] as const;
 
 const MIGRATIONS_URL = new URL("../../migrations/", import.meta.url);
